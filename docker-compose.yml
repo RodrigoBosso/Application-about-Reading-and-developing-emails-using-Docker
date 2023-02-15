@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+    api:
+        container_name: scheduler
+        build: .
+        ports:
+            - "80:80"
+        depends_on:
+            - mongodb
+    mongodb:
+        image: mongo:latest
+        container_name: 'my_mongo_container'
+        environment:
+            - MONGO_INITDB_DATABASE=schedule
+            - MONGO_INITDB_ROOT_USERNAME=giovanna
+            - MONGO_INITDB_ROOT_PASSWORD=abc123
+        volumes: 
+            - .mongo-volume:/data/db
+        ports:
+            - "27017:27017"
+       
